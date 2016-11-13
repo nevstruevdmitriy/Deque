@@ -27,7 +27,7 @@ private:
         if (ind >= sizeDeque)
             throw 1;
     }
-    void get(const int sizeNuw) {
+    void get(int sizeNuw) {
         sizeNuw = max(sizeNuw, MIN_SIZE_BUFFER);
         T* newBuffer = new T[sizeNuw];
         T* indNewBuffer = newBuffer;
