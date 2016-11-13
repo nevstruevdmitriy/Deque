@@ -42,7 +42,7 @@ private:
         beginDeque = buffer;
         endDeque = indNewBuffer;
     }
-    template <bool r, typename refer, typename point>
+    template <bool r, typename refer, typename point> //&, *
     class privateIterator : public std::iterator<std::random_access_iterator_tag, T> {
     private:
         int beginInd;
@@ -77,6 +77,7 @@ private:
         }
 
         privateIterator<r, refer, point>& operator ++() {
+            //if ((!rev && iteratorInd == endInd) || (rev && (iteratorInd + 1) % bufferSizeIt == beginInd)) throw(1);
             iteratorInd = (!rev ? (iteratorInd + 1) % bufferSizeIt : (iteratorInd - 1 + bufferSizeIt) % bufferSizeIt);
             return *this;
         }
@@ -117,19 +118,20 @@ private:
         refer operator [](const int n){
             return (bufferSizeIt > n + iteratorInd) ? *((bufferIt + n) % bufferSize) : *(bufferIt + n - bufferSize);
         }
-        privateIterator operator +(const int n) {
+        privateIterator operator +(int n) {
+            if (!rev && n > posit()) {}
             return privateIterator((!rev) ? (iteratorInd + n) % bufferSizeIt : (iteratorInd - n + bufferSizeIt) % bufferSizeIt, bufferIt, bufferSizeIt, beginInd, endInd);
         }
-        privateIterator operator -(const int n) {
+        privateIterator operator -(int n) {
             return privateIterator((!rev) ? (iteratorInd - n + bufferSizeIt) % bufferSizeIt : (iteratorInd + n) % bufferSizeIt, bufferIt, bufferSizeIt, beginInd, endInd);
         }
         int operator -(const privateIterator &a){   
             return posit() - a.posit();
         }
-        void operator +=(const int n) {
+        void operator +=(int n) {
             (*this) = (*this) + n;
         }
-        void operator -=(const int n) {
+        void operator -=(int n) {
             (*this) = (*this) - n;
         }
         bool operator <(const privateIterator<r, refer, point>& a) {
