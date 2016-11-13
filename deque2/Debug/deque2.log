@@ -1,0 +1,5 @@
+﻿  main.cpp
+c:\прога\deque\deque2\deque2\deque2\deque.h(31): error C3892: sizeNuw: невозможно присваивать значения переменной, которая объявлена как константа
+  c:\прога\deque\deque2\deque2\deque2\deque.h(30): note: при компиляции функции-члена "<Нет данных>" класса <Нет данных>
+  c:\прога\deque\deque2\deque2\deque2\deque.h(220): note: см. ссылку на создание экземпляров функции шаблон при компиляции "void Deque<int>::get(const int)"
+  c:\прога\deque\deque2\deque2\deque2\main.cpp(8): note: см. ссылку на создание экземпляров класса шаблон при компиляции "Deque<int>"
